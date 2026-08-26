@@ -61,10 +61,10 @@ function mountContact() {
         form.reset();
         say('Sent. You will get a reply at the address you gave, usually within five working days.', false);
       } else {
-        say('That did not go through. Email tommycoupe@gmail.com directly and it will reach the same place.', true);
+        say('That did not go through. Nothing was sent, so your message is still in the form. Try again in a minute.', true);
       }
     } catch {
-      say('The message could not be sent, most likely a network problem. Email tommycoupe@gmail.com directly instead.', true);
+      say('The message could not be sent, most likely a network problem. Your text is still here, so try again once you are back online.', true);
     } finally {
       button.disabled = false;
     }
