@@ -120,7 +120,8 @@ function mountSearch() {
 
   input.addEventListener('input', run);
 
-  fetch('/search-index.json')
+  // Relative, so the page works from a site root or from a /<repo>/ subpath.
+  fetch(new URL('../search-index.json', document.baseURI))
     .then((r) => r.json())
     .then((data) => { index = data; run(); })
     .catch(() => { status.textContent = 'The search index failed to load. Browse the archive instead.'; });

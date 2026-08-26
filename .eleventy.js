@@ -1,5 +1,10 @@
+import { HtmlBasePlugin } from "@11ty/eleventy";
+
 export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets");
+
+  // Rewrites root-relative URLs in the output HTML to sit under pathPrefix.
+  eleventyConfig.addPlugin(HtmlBasePlugin);
 
   eleventyConfig.addFilter("readableDate", (value) =>
     new Date(value).toLocaleDateString("en-GB", {
@@ -41,6 +46,8 @@ export default function (eleventyConfig) {
   );
 
   return {
+    // GitHub Pages serves a project site from /<repo>/. Override for a bare domain.
+    pathPrefix: process.env.PATH_PREFIX || "/",
     dir: { input: "src", includes: "_includes", output: "_site" },
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
