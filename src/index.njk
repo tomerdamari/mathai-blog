@@ -1,0 +1,101 @@
+---
+layout: base.njk
+title: "Proof & Machine"
+description: "A blog about artificial intelligence and mathematics: theorem provers, olympiad solvers, benchmark honesty, and the puzzles that still break both."
+permalink: /
+---
+
+<section class="hero">
+  <div class="wrap">
+    <h1>Machines that do mathematics, examined honestly.</h1>
+    <p>Twenty essays on theorem provers, olympiad solvers, computer-assisted proofs and the riddles that still catch both people and models. No hype, no dismissal, and every claim traced to what was actually demonstrated.</p>
+    <p><a class="btn" href="/articles/">Read the archive</a></p>
+    <div class="hero-meta">
+      <span>{{ collections.posts | length }} articles</span>
+      <span>Founded 2026</span>
+      <span>Independent</span>
+      <span>No advertising</span>
+    </div>
+  </div>
+</section>
+
+{% set lead = collections.posts | first %}
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Latest</h2>
+      <a href="/articles/">All articles</a>
+    </div>
+
+    <div class="lead-story">
+      <div>
+        <p class="kicker">{{ lead.data.category }} &middot; {{ lead.date | readableDate }}</p>
+        <h3><a href="{{ lead.url }}">{{ lead.data.title }}</a></h3>
+        <p class="muted">{{ lead.data.description }}</p>
+        <p><a class="btn" href="{{ lead.url }}">Read it</a></p>
+      </div>
+      <div class="figure-block" aria-hidden="true"><span>&#8721;</span></div>
+    </div>
+
+    <div class="grid">
+      {% for post in collections.posts | limit(6) %}
+        {% if not loop.first %}
+        <article class="card">
+          <p class="kicker">{{ post.data.category }}</p>
+          <h3><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+          <p>{{ post.data.description }}</p>
+          <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
+        </article>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>The tool</h2>
+      <a href="/tool/">Open the solver</a>
+    </div>
+    <div class="lead-story">
+      <div>
+        <h3><a href="/tool/">A calculator that shows every step, and never guesses</a></h3>
+        <p class="muted">Expressions, quadratics, prime factorisation and the Euclidean algorithm, each printing the operations it actually performed. Shunting-yard from 1961, Euclid from 300 BCE, running in your browser with no network calls. It exists as a working contrast to a system that produces plausible numbers instead of correct ones.</p>
+        <p><a class="btn" href="/tool/">Use the step solver</a></p>
+      </div>
+      <div class="figure-block" aria-hidden="true"><span>&radic;</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head"><h2>What this publication is</h2></div>
+    <div class="narrow prose" style="width:auto;max-width:46rem;margin-inline:0">
+
+<p>There are two comfortable positions on artificial intelligence and mathematics, and both are wrong in ways that are easy to demonstrate.</p>
+
+<p>The first is that the problem is essentially solved. Systems score gold medals at the International Mathematical Olympiad, they pass benchmarks that stumped researchers three years ago, and the remaining gap is a matter of scale. This position survives only if you do not look at how the benchmark numbers were produced, or at what happens when a famous problem is altered so the famous answer no longer applies.</p>
+
+<p>The second is that none of it counts, because a statistical model predicting tokens cannot understand anything and therefore cannot do mathematics. This position has to explain away a growing list of specific results: a matrix multiplication algorithm that improved on a bound standing since 1969, a knot theory relationship found by a neural network and then proven by humans, competition problems solved by a system that invents the auxiliary construction and hands the deduction to a symbolic engine.</p>
+
+<p>Neither camp is being careless on purpose. They are looking at different evidence and neither is checking the other's. This site tries to hold both sets of evidence at once, which mostly means being specific about which component of a system produced which guarantee.</p>
+
+<p>That framing recurs across almost every article here, because it turns out to be the load-bearing distinction. Modern mathematical AI is not one thing. It is a neural component that proposes and a symbolic component that verifies. AlphaGeometry pairs a language model with a deduction engine. AlphaProof pairs one with the Lean type checker. A SAT solver pairs learned branching heuristics with a resolution proof that a formally verified checker reads line by line. In every case the creativity comes from the part that can be wrong, and the certainty comes from the part that cannot.</p>
+
+<p>Once you have that lens, a lot of confused argument resolves. A model that produces an unverified proof has produced a conjecture. A model that produces a Lean term which type-checks has produced a theorem. These are different objects and the difference has nothing to do with how convincing the prose was.</p>
+
+<p>The articles fall into a few groups. Some are history: the four colour theorem and the first proof no human could read, seventy years of trying to teach machines arithmetic, thirty years of volunteers hunting Mersenne primes. Some are mechanism: what chain of thought actually buys you, why tokenisation makes counting letters hard, what a proof assistant kernel does. Some are honest accounting: the benchmark contamination problem, how to check a derivation you did not produce, what olympiad performance does and does not indicate. And some are puzzles, because a riddle with a changed premise is the cheapest diagnostic anyone has for telling memorisation from reasoning.</p>
+
+<p>Everything here is written for a reader who is comfortable with secondary-school mathematics and willing to follow an argument. No prior knowledge of machine learning is assumed. Where a claim rests on a specific paper or result, the paper is named, so you can go and disagree with it directly rather than with a summary.</p>
+
+<p>A recurring theme worth flagging in advance, because it runs through more than half the archive: the gap between knowing a thing is true and understanding why it is true keeps widening. The four colour theorem was settled in 1976 by checking 1,936 configurations, and nobody can point at the argument and explain what makes the number four. The Boolean Pythagorean triples problem was settled in 2016 with a 200-terabyte proof log, and nobody knows what changes at 7,825. Both results are certain. Neither is illuminating. As more mathematics gets settled by search rather than by insight, that gap is the cost, and no one has proposed a way to close it.</p>
+
+<p>The counterweight is formalisation. A proof checked by a small kernel against explicit axioms is trustworthy in a way that a ninety-page paper read by two referees is not, and Mathlib now contains enough mathematics that formalising a new result costs about as much as writing it up informally. That shift is quieter than the olympiad headlines and it will probably matter more.</p>
+
+<p>We publish irregularly, we take corrections seriously, and we would rather post nothing than post a number we have not checked.</p>
+
+    </div>
+  </div>
+</section>

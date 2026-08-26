@@ -1,0 +1,90 @@
+---
+layout: base.njk
+title: "Search"
+description: "Search every article on Proof & Machine. The index is built at publication time and the search runs in your browser, with no query sent anywhere."
+permalink: /search/
+---
+
+<div class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">Search</p>
+    <h1>Search</h1>
+    <p>Every word you type stays on your machine. The index is a JSON file built when the site is published, downloaded once, and searched locally.</p>
+  </div>
+</div>
+
+<div class="wrap page-body">
+  <div id="search">
+    <div class="narrow" style="margin-inline:0;width:auto;max-width:34rem">
+      <div class="field">
+        <label for="q">Search articles</label>
+        <input type="search" id="q" autocomplete="off" spellcheck="false" placeholder="proof assistant, tokenisation, Collatz">
+      </div>
+      <p class="muted small" id="search-status" role="status" aria-live="polite">Loading the index...</p>
+    </div>
+
+    <ul class="index-list" id="results" style="margin-top:2rem"></ul>
+  </div>
+
+  <div class="prose narrow" style="margin-top:3.5rem;margin-inline:0;width:auto">
+
+<h2>How this search works</h2>
+
+<p>At build time, every page on the site is rendered, stripped of its HTML tags, and written into a single JSON file alongside its title, description, category and date. When you open this page, your browser downloads that file once. Typing filters it locally.</p>
+
+<p>The ranking is deliberately simple. A term appearing in a title is worth twelve points, in the description five, and in the body a value that grows with the logarithm of the number of occurrences and caps at six. Every term you type has to appear somewhere on a page for it to be returned, so adding words narrows results rather than widening them. Matches are highlighted in both the title and the snippet.</p>
+
+<p>There is no stemming, no fuzzy matching and no synonym expansion. Searching for <em>prove</em> will not find <em>proof</em>. This is a real limitation and the fix is a stemmer, which would add a dependency and several hundred lines to search twenty-eight pages. If the archive grows past a few hundred articles it will be worth doing.</p>
+
+<h2>What is in the index</h2>
+
+<p>Every page the site publishes, which is twenty articles plus the home page, the archive, the solver and the four static pages. The static pages are indexed alongside the articles because people looking for the accessibility commitments or the reuse terms should find them by searching rather than by hunting through the footer.</p>
+
+<p>For each page the index carries the URL, the title, the one-line description, the category, the publication date and the full body text with markup removed. Nothing else. There are no keywords, no hidden terms and no ranking adjustments applied by hand, so a page that appears at the top does so because the words you typed are in its title or occur repeatedly in its text.</p>
+
+<p>The whole file is a little over two hundred kilobytes uncompressed, which arrives as considerably less over the wire because the server compresses it. That is the price of the entire archive being searchable offline once the page has loaded. Search again after you lose connectivity and it still works, because there is nothing left to fetch.</p>
+
+<h2>Getting better results</h2>
+
+<p>Terms narrow rather than widen, so start with one word and add a second only if the first returns too much. Searching for <em>proof</em> returns most of the archive. Searching for <em>proof kernel</em> returns the pieces that discuss what a proof assistant's trusted core actually does.</p>
+
+<p>Search for the specific noun rather than the concept. The articles name things precisely, so <em>Mathlib</em>, <em>shunting-yard</em>, <em>discriminant</em>, <em>tokeniser</em>, <em>discharging</em> and <em>DRAT</em> all land on exactly one or two pages. General words like <em>reasoning</em> or <em>intelligence</em> appear everywhere and sort poorly.</p>
+
+<p>Search for a person or a system if you remember one. Names carry well here: Strassen, Erdős, Ramanujan, Gonthier, Kempe, AlphaGeometry, AlphaTensor, Lean, GIMPS, Graffiti.</p>
+
+<p>Because there is no stemming, try the other form if a word returns nothing. Singular and plural are different terms. So are <em>formalise</em> and <em>formalisation</em>. British spellings are used throughout, so <em>colour</em> finds the four colour theorem piece and <em>color</em> does not.</p>
+
+<p>Highlighting shows you why a page matched. If the marked words are all in the snippet and none in the title, the match is probably incidental and the page below it may be the one you want.</p>
+
+<h2>Why not a hosted search service</h2>
+
+<p>Because a hosted search box sends every keystroke to a third party, along with your address and enough context to build a profile of what you were curious about. That is the standard arrangement and it is invisible to the person typing.</p>
+
+<p>Doing it locally costs one file download of a few hundred kilobytes, which is less than a single photograph on most sites, and it means the query never leaves the browser. Open your network tab and watch: there is one request for the index when the page loads, and nothing after it, however much you type.</p>
+
+<p>The same reasoning governs the rest of the site. No analytics, no cookies, no third-party scripts. The <a href="/privacy/">privacy page</a> explains how to verify all of it in about a minute.</p>
+
+<h2>If search does not find it</h2>
+
+<p>The full <a href="/articles/">archive listing</a> shows every article with its category, description and date, ordered newest first, and that page also carries a short guide to reading the collection in a sensible order if you are starting cold.</p>
+
+<p>The archive is also organised loosely into four groups. History covers results that machines settled and humans could not check, including the four colour theorem and the 200-terabyte proof of the Boolean Pythagorean triples problem. Mechanism explains how the systems work, including tokenisation, chain of thought and what a proof assistant kernel actually does. Analysis covers benchmark contamination and how to read a capability claim. Puzzles covers riddles and the boundaries of computation.</p>
+
+<p>There is also a <a href="/feed.xml">feed</a> if you would rather be told when something new appears than come back and check. It is an Atom feed carrying the full text of every article, not a truncated summary that forces a click, and it works in any reader.</p>
+
+<h2>Known limits</h2>
+
+<p>Four, stated plainly rather than discovered by you.</p>
+
+<p>No stemming or fuzzy matching, as described above. A misspelling returns nothing rather than a suggestion.</p>
+
+<p>No phrase search. Quoting a phrase has no effect; the words are treated separately and a page containing all of them anywhere will match. For an archive this size that has not been a problem in practice, and adding it would mean storing positional data that roughly doubles the index.</p>
+
+<p>Ranking is a fixed formula rather than anything learned from what people click, because nothing here records what people click. A term in a title outweighs a term repeated twenty times in a body, which is usually right and occasionally buries a page that discusses your topic at length under one that mentions it in a heading.</p>
+
+<p>Search requires JavaScript, since the filtering runs in your browser. With scripts disabled this page shows the input and the explanation and nothing happens when you type. The <a href="/articles/">archive listing</a> is the fallback and it needs no scripts at all.</p>
+
+  </div>
+</div>
+
+<script type="module" src="/assets/search.js"></script>

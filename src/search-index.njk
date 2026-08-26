@@ -1,0 +1,15 @@
+---
+permalink: /search-index.json
+eleventyExcludeFromCollections: true
+---
+[
+{%- for page in collections.all -%}
+{%- if not loop.first %},{% endif %}
+{"url":{{ page.url | dump | safe }},
+ "title":{{ (page.data.title or "Untitled") | dump | safe }},
+ "description":{{ (page.data.description or "") | dump | safe }},
+ "category":{{ (page.data.category or "Page") | dump | safe }},
+ "date":{{ (page.date | isoDate) | dump | safe }},
+ "text":{{ page.templateContent | striptags(true) | collapse | dump | safe }}}
+{%- endfor -%}
+]

@@ -1,0 +1,139 @@
+---
+layout: base.njk
+title: "Step Solver"
+description: "A small exact calculator that shows every intermediate step: expressions, quadratics, prime factorisation and the Euclidean algorithm. Runs entirely in your browser."
+permalink: /tool/
+---
+
+<div class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">Tool</p>
+    <h1>Step Solver</h1>
+    <p>Four exact calculators that show their working. No network requests, no accounts, no model in the loop. Everything below runs as JavaScript in your own browser, which is the point.</p>
+  </div>
+</div>
+
+<div class="wrap page-body">
+
+<div id="solver">
+  <div class="tabs" role="tablist" aria-label="Solver mode">
+    <button type="button" role="tab" data-tab="expr" aria-selected="true">Expression</button>
+    <button type="button" role="tab" data-tab="quad" aria-selected="false">Quadratic</button>
+    <button type="button" role="tab" data-tab="fact" aria-selected="false">Factorise</button>
+    <button type="button" role="tab" data-tab="gcd" aria-selected="false">GCD / LCM</button>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-pane">
+      <h2>Input</h2>
+
+      <div data-panel="expr">
+        <div class="field">
+          <label for="expr">Expression</label>
+          <input type="text" id="expr" value="2 + 3 * 4 ^ 2" autocomplete="off" spellcheck="false">
+        </div>
+        <p class="muted small">Operators <code>+ - * / % ^</code>, parentheses, and the functions sqrt, abs, ln, log, sin, cos, tan, exp, floor, ceil, round. Constants pi, e, tau.</p>
+        <p><button class="btn" type="button" id="expr-go">Evaluate</button></p>
+        <div class="examples" id="expr-examples">
+          <button type="button">(1+2)*(3+4)</button>
+          <button type="button">2^3^2</button>
+          <button type="button">sqrt(2)^2</button>
+          <button type="button">ln(e^5)</button>
+          <button type="button">-3^2</button>
+        </div>
+      </div>
+
+      <div data-panel="quad" class="hidden">
+        <p class="muted small">Solves <code>ax^2 + bx + c = 0</code> over the reals, reporting complex roots when the discriminant is negative.</p>
+        <div class="row">
+          <div class="field"><label for="qa">a</label><input type="number" id="qa" value="1" step="any"></div>
+          <div class="field"><label for="qb">b</label><input type="number" id="qb" value="-3" step="any"></div>
+          <div class="field"><label for="qc">c</label><input type="number" id="qc" value="2" step="any"></div>
+        </div>
+        <p><button class="btn" type="button" id="quad-go">Solve</button></p>
+      </div>
+
+      <div data-panel="fact" class="hidden">
+        <div class="field">
+          <label for="fact-n">Whole number (2 or more)</label>
+          <input type="number" id="fact-n" value="360" min="2" step="1">
+        </div>
+        <p class="muted small">Trial division up to the square root. Exact for anything up to about 10^15, which is where JavaScript integers stop being safe.</p>
+        <p><button class="btn" type="button" id="fact-go">Factorise</button></p>
+      </div>
+
+      <div data-panel="gcd" class="hidden">
+        <div class="row">
+          <div class="field"><label for="gcd-a">a</label><input type="number" id="gcd-a" value="1071" step="1"></div>
+          <div class="field"><label for="gcd-b">b</label><input type="number" id="gcd-b" value="462" step="1"></div>
+        </div>
+        <p class="muted small">The Euclidean algorithm, with each division shown, plus the least common multiple derived from the result.</p>
+        <p><button class="btn" type="button" id="gcd-go">Compute</button></p>
+      </div>
+    </div>
+
+    <div class="tool-pane">
+      <h2>Result</h2>
+      <div class="result" id="result" role="status" aria-live="polite">Ready.</div>
+      <div id="steps-wrap" class="hidden">
+        <h2>Working</h2>
+        <ol class="steps" id="steps"></ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="prose" style="margin-top:3rem">
+
+<h2>Why a calculator on a blog about AI</h2>
+
+<p>Because the contrast is the argument. Everything in the box above is an algorithm. The expression evaluator runs Dijkstra's shunting-yard method, published in 1961, to convert your input into reverse Polish notation, then walks the resulting stack. The quadratic solver applies a formula that appears in Babylonian tablets in geometric form and reached its modern shape through Brahmagupta in the seventh century. The factoriser does trial division, which is as old as anyone can trace. The greatest common divisor uses Euclid's algorithm from around 300 BCE, still the method of choice after twenty-three centuries.</p>
+
+<p>None of these guess. Given a valid input each produces the correct answer, and given an invalid input each says so rather than producing something plausible. That second property is the one worth dwelling on, because it is exactly what a language model does not offer.</p>
+
+<h2>What the steps are actually showing</h2>
+
+<p>The working panel is not a reconstruction. It is a log of the operations that produced the answer, emitted as they happened. When the expression evaluator tells you that it computed 4 raised to the power 2 and got 16, that multiplication genuinely occurred, in that order, and the 16 was genuinely carried into the next operation.</p>
+
+<p>This distinction matters more than it sounds. When a language model shows its reasoning, the reasoning is generated text, produced by the same process that produces every other token. There is no mechanism connecting it to the computation that produced the answer, and there is published evidence that the two frequently diverge: models produce reasoning chains that do not reflect the factors actually driving their output. A chain of thought is a plausible explanation, not a trace.</p>
+
+<p>Here the trace is the computation. If you disagree with the answer, you can point at the exact step where it went wrong, and that step is a real event.</p>
+
+<h2>The expression parser, in more detail</h2>
+
+<p>Parsing arithmetic correctly is one of those problems that seems trivial until you attempt it. The difficulty is precedence and associativity. Multiplication binds tighter than addition, so <code>2+3*4</code> is 14 and not 20. Exponentiation binds tighter still and associates to the right, so <code>2^3^2</code> is 2 raised to the ninth power, which is 512, and not 8 squared, which is 64. Unary minus is the awkward one: <code>-3^2</code> is negative nine in standard mathematical convention, because the exponent binds before the negation, which surprises people and is a genuine source of bugs in spreadsheet software. Try all three in the box.</p>
+
+<p>The shunting-yard algorithm handles this with an operator stack and a precedence table. Numbers go straight to the output. Operators pop higher-precedence operators off the stack before pushing themselves. Parentheses push and pop markers. What comes out is a sequence in reverse Polish notation, where the order of operations is explicit and no parentheses are needed, and evaluating that is a simple stack walk.</p>
+
+<p>The whole thing is about a hundred lines. It is the sort of component that a language model will write for you correctly on most attempts, and where the failures are subtle: an off-by-one in the associativity comparison produces a parser that is right on almost every input and wrong on right-associative chains. This is why the implementation here ships with a test file that checks precedence, associativity, unary minus, division by zero, unbalanced parentheses and unknown identifiers. Run it with <code>node solver.test.mjs</code>.</p>
+
+<h2>Floating point, and where this tool is not exact</h2>
+
+<p>An honest tool states its limits. This one uses JavaScript numbers, which are IEEE 754 double-precision floats, and that has consequences.</p>
+
+<p>Decimal fractions that terminate in base ten often do not terminate in base two. The value 0.1 is not representable exactly, so <code>0.1 + 0.2</code> evaluates to 0.30000000000000004 in any language using doubles. Display rounding hides this in the panel above, and the underlying value still carries the error.</p>
+
+<p>Large integers lose precision above 2 raised to the 53, which is about nine quadrillion. The factoriser refuses inputs above 10 to the 15 for this reason rather than returning quiet nonsense.</p>
+
+<p>Repeated operations accumulate error. Summing a million small numbers into a large running total loses low-order bits at every step, which is why numerical libraries use compensated summation instead of a naive loop.</p>
+
+<p>Real computer algebra systems avoid all of this by using exact rational arithmetic and arbitrary-precision integers, representing one third as a pair of integers rather than as 0.333 repeating. That is the right design for a serious tool and it is more machinery than a page like this warrants. The tradeoff is stated here rather than hidden, which is the general principle worth applying to any calculator you did not write.</p>
+
+<h2>How to use this alongside a language model</h2>
+
+<p>The division of labour that works is consistent across every task in this area. Use the model for translation, use the algorithm for computation.</p>
+
+<p>A word problem arrives in English. The model turns it into an expression or a set of coefficients, which is the part requiring interpretation of ambiguous human language, and the part where a parser is helpless. You then put the expression into a tool that evaluates it exactly. The answer comes back and the model helps you interpret what it means in the original context.</p>
+
+<p>What goes wrong is when the model does the middle step too. It will produce a number. The number will be right often enough that checking feels unnecessary, and wrong often enough that skipping the check is a mistake. The failures are silent and carry no signal, which makes them worse than loud failures at the same rate.</p>
+
+<p>So: paste the expression here, or into a Python interpreter, or into whatever exact tool you have. It takes four seconds and it converts a probable answer into a certain one.</p>
+
+<h2>Privacy</h2>
+
+<p>Nothing you type here leaves your browser. There is no analytics on this page, no request to any server after the page loads, and no storage of your input. You can verify this by opening your browser's network tab and watching it stay empty while you calculate. The whole engine is a single JavaScript file served from this domain, readable at <code>/assets/solver.js</code>.</p>
+
+</div>
+</div>
+
+<script type="module" src="/assets/solver.js"></script>

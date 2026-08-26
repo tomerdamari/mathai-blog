@@ -1,0 +1,92 @@
+---
+layout: base.njk
+title: "About"
+description: "Who writes Proof & Machine, how the articles are researched and checked, what the editorial standards are, and how the site is funded."
+permalink: /about/
+---
+
+<div class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">About</p>
+    <h1>About Proof &amp; Machine</h1>
+    <p>An independent publication about artificial intelligence and mathematics, written for people who want the specifics rather than the summary.</p>
+  </div>
+</div>
+
+<div class="wrap narrow page-body prose">
+
+<h2>Why this exists</h2>
+
+<p>Coverage of machines doing mathematics tends to collapse into one of two shapes. Either a system has achieved something remarkable and the implication is that everything else follows, or a system has failed at something a child could do and the implication is that none of it counts.</p>
+
+<p>Both shapes are produced by the same underlying problem, which is that the systems are composites and the coverage treats them as single things. When a system solves an olympiad geometry problem, it usually did so with a language model proposing an auxiliary construction and a symbolic deduction engine grinding out the consequences and checking every step. The proposing half is creative and frequently wrong. The checking half is unimaginative and never wrong. Attributing the result to the system as a whole loses exactly the information you need to know how much to trust it.</p>
+
+<p>This site is an attempt to write about the subject with that distinction kept intact. Most articles here come down to the same question asked in a different setting: which component produced the guarantee?</p>
+
+<h2>Editorial standards</h2>
+
+<p>Four rules, applied to everything published here.</p>
+
+<p><strong>Name the source.</strong> Where a claim rests on a specific paper, competition result or benchmark run, the article names it. Not a link to a summary of it, the thing itself, with enough detail that you can find and read it. If we cannot name a source for a claim, the claim is marked as an impression rather than stated as fact.</p>
+
+<p><strong>State the conditions.</strong> A benchmark number without its conditions is not information. Was the evaluation run with tools available? How many samples were taken, and was the best of several scored? When was the benchmark published relative to the model's training cutoff? These change results by margins larger than the differences usually being reported, so they appear in the text.</p>
+
+<p><strong>Distinguish verified from unverified.</strong> A proof that a type checker accepted and a proof that reads convincingly are different objects. Where an article describes a machine-produced mathematical result, it says whether the result was formally verified, checked by an independent implementation, refereed by humans, or none of these.</p>
+
+<p><strong>Report the caveat that weakens the story.</strong> When AlphaTensor found a 47-multiplication algorithm for 4-by-4 matrices, the result was over the field with two elements, which is a real restriction that most coverage omitted. When human researchers beat its 5-by-5 record within two weeks, that belongs in the same article. Leaving out the inconvenient half is the most common way to write something technically accurate and materially false.</p>
+
+<h2>How articles get made</h2>
+
+<p>Research starts with primary sources: the paper, the repository, the competition results page, the benchmark's own documentation. Secondary coverage is used to find primary sources and is not cited as evidence for anything.</p>
+
+<p>Every numerical claim is checked against the source at the point of writing, and again before publication. Numbers that come from a single unreplicated study are labelled as such. Numbers that come from an organisation reporting on its own product are labelled as such.</p>
+
+<p>Where an article makes a claim that can be tested directly, it gets tested. If a piece says that models fail on a particular kind of perturbed problem, someone ran the perturbed problems. If it says a parser handles right-associative exponentiation correctly, there is a test file in the repository that checks it.</p>
+
+<p>Drafts are read by someone who did not write them, with a specific instruction to look for the step where the argument assumes what it is trying to show. This catches more than any other part of the process.</p>
+
+<h2>On the use of AI in producing this site</h2>
+
+<p>It would be strange to write about these systems without disclosing our own use of them, so: they are used, in a bounded way, and here is the boundary.</p>
+
+<p>Language models are used for finding sources, for checking whether a paragraph is comprehensible to someone outside the field, and for adversarial reading, where a draft is handed over with an instruction to find the weakest claim in it. They are useful for all three.</p>
+
+<p>They are not used to write the articles, and they are not used as a source for any factual claim. Every fact in every piece traces to a document a person read. This is not a purity position. It is that a model's output about a specific benchmark number or publication date is unreliable in exactly the way that would be invisible to a reader and embarrassing to us.</p>
+
+<p>Where a piece describes model behaviour, that behaviour was observed directly rather than recalled from a paper about it, and the observation date is stated, because these systems change and a claim about what a model does is a claim about a particular month.</p>
+
+<h2>The people</h2>
+
+<p><strong>Dana Reisman</strong> writes about formal methods and system architecture. Background in programming language theory, several years working on static analysis tooling, and an ongoing and largely unsuccessful attempt to formalise a piece of her own doctoral work in Lean, which has produced more sympathy for the de Bruijn factor than any reading could.</p>
+
+<p><strong>Yonatan Peled</strong> writes the explainers and the analysis pieces. Background in statistics and applied probability, previously worked on evaluation methodology, which is where the recurring interest in what a benchmark number is actually measuring comes from.</p>
+
+<p><strong>Miriam Adler</strong> writes the history and open-problems pieces. Trained as a number theorist, spent several years in scientific computing, and maintains that the most underrated fact in the field is that Euclid's algorithm is still the best known method for what it does after twenty-three centuries.</p>
+
+<p>Contributions from outside are welcome, particularly corrections and particularly from people who work on the systems being described. The <a href="/contact/">contact page</a> explains how.</p>
+
+<h2>Funding and independence</h2>
+
+<p>The site carries no advertising, runs no analytics, sets no cookies, and takes no sponsorship from any company building the systems it writes about. There is no paywall and no subscription.</p>
+
+<p>This is affordable because a static site costs almost nothing to serve. The whole thing is a few hundred kilobytes of HTML and CSS generated ahead of time, with one JavaScript file for the solver page. There is no database, no server-side rendering, and no third-party script anywhere in the build.</p>
+
+<p>If that changes, it will be stated on this page before it happens rather than discovered in a privacy policy update.</p>
+
+<h2>Corrections policy</h2>
+
+<p>Errors get fixed in place, with a note at the foot of the article recording what was wrong, what it now says, and the date. We do not silently edit. If a correction changes the conclusion of a piece rather than a detail within it, the note goes at the top.</p>
+
+<p>Superseded is different from wrong. An article stating a benchmark record that has since been beaten was accurate when published, and the publication date is on every piece. Those get updated when we get to them, without a correction note, because nothing was incorrect.</p>
+
+<p>The distinction we care about most: if an article overstated what a result demonstrated, that is an error and gets a note, even though every individual sentence was defensible. Framing is a claim.</p>
+
+<h2>Technical notes</h2>
+
+<p>The site is built with Eleventy, a static site generator, from Markdown and Nunjucks templates. The output is plain HTML with one stylesheet. There is no client-side framework, no font loaded from a third party, and no tracking of any kind. Pages render without JavaScript, with the single exception of the solver, which is a calculator and cannot do otherwise.</p>
+
+<p>Typography is a serif for headings and the system sans-serif stack for body text, which means the page uses fonts already on your machine and loads nothing over the network to display text. The palette is black and white with three greys, and the whole thing inverts under a dark colour scheme preference.</p>
+
+<p>Accessibility commitments and known gaps are documented on the <a href="/accessibility/">accessibility page</a>, which is kept current rather than written once and abandoned.</p>
+
+</div>

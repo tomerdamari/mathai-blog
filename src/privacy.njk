@@ -1,0 +1,108 @@
+---
+layout: base.njk
+title: "Privacy"
+description: "What Proof & Machine collects, which is almost nothing, what the host logs, and how to verify all of it yourself in about a minute."
+permalink: /privacy/
+---
+
+<div class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">Legal</p>
+    <h1>Privacy</h1>
+    <p>Last updated 26 August 2026. Short version: no cookies, no analytics, no third-party scripts, no accounts, and nothing you type in the solver leaves your machine.</p>
+  </div>
+</div>
+
+<div class="wrap narrow page-body prose">
+
+<h2>The summary</h2>
+
+<p>This site sets no cookies. It runs no analytics. It loads no fonts, scripts, images or stylesheets from any other domain. It has no accounts, no newsletter, no comment system and no contact form. It does not use local storage or session storage.</p>
+
+<p>The one piece of JavaScript on the site is the step solver, which is a calculator that runs in your browser and makes no network requests at any point.</p>
+
+<p>You do not have to take our word for any of this, and the section on verification below explains how to check it in about a minute.</p>
+
+<h2>Why there is no cookie banner</h2>
+
+<p>Because there are no cookies. Consent requirements under the ePrivacy Directive and similar regimes apply to storing or accessing information on your device that is not strictly necessary for a service you requested. Nothing here stores anything on your device beyond the ordinary browser cache for the pages themselves.</p>
+
+<p>A cookie banner on a site with no cookies would be theatre, and the reason so many exist is that a site with three trackers finds it cheaper to install a consent tool than to remove the trackers.</p>
+
+<h2>What the hosting provider sees</h2>
+
+<p>This is the part most privacy policies obscure, so here it is plainly.</p>
+
+<p>Static files have to be served by a machine, and that machine receives a request from your browser. The request necessarily contains your IP address, because that is how the response gets back to you. It also contains whatever your browser sends by default: the user agent string, the requested path, the referring page if you arrived through a link, and your language preference headers.</p>
+
+<p>Hosting providers typically write these into an access log, retained for a period, used for operational purposes such as diagnosing failures and detecting abuse. We do not configure this, do not query it, and do not connect it to anything.</p>
+
+<p>An IP address is personal data under the GDPR. The lawful basis for the host's processing is legitimate interest in operating and securing the service, which is the standard basis for server logs and is narrow: the logs cannot lawfully be used to build a profile of you, and they are not.</p>
+
+<p>If you would rather not share your address with the host at all, a VPN or Tor works here as it does anywhere, and nothing on this site will break as a result.</p>
+
+<h2>The step solver</h2>
+
+<p>Everything you type into the calculator is processed by JavaScript running in your browser. The expression is tokenised, converted to reverse Polish notation and evaluated locally. The result is written into the page.</p>
+
+<p>No request is made. Nothing is stored. Nothing is logged. Reloading the page discards everything.</p>
+
+<p>This is not a policy commitment that could quietly change. It is a property of the code, which is served from this domain at <code>/assets/solver.js</code>, is a few hundred lines, and contains no fetch, no XMLHttpRequest, no WebSocket and no storage call. You can read it.</p>
+
+<h2>How to verify this yourself</h2>
+
+<p>Open your browser's developer tools before loading a page here. In Firefox or Chrome that is F12, or right-click and choose Inspect.</p>
+
+<p>Go to the Network tab and reload. You will see requests for the HTML document, one stylesheet, and on the solver page one JavaScript file. Every one is served from this domain. There are no requests to any analytics endpoint, font provider, CDN or tag manager, because there is nothing here to make them.</p>
+
+<p>Go to the Application or Storage tab and look at Cookies, Local Storage and Session Storage. All empty.</p>
+
+<p>Now use the solver. Watch the Network tab while you evaluate an expression. Nothing appears.</p>
+
+<p>This check takes under a minute and it is worth doing on any site that makes claims like these, including this one. A privacy policy is a promise. The network tab is evidence.</p>
+
+<h2>Email</h2>
+
+<p>If you email us, we have your email. That is how email works.</p>
+
+<p>Messages are read by the editors and kept while the matter is open. Correspondence about a correction is retained alongside the article's revision history, because a correction note needs to be traceable to what prompted it. Other correspondence is deleted when it is no longer needed, generally within a year.</p>
+
+<p>Your address is never added to any list, shared with anyone, or used for anything other than replying to you. There is no list to add it to.</p>
+
+<p>If you are credited in a correction note, only the name you ask to be credited under appears, never your address. If you prefer not to be credited, say so and you will not be.</p>
+
+<h2>External links</h2>
+
+<p>Articles link to papers, repositories and other sites. Following a link takes you to a service with its own practices, which are frequently very different from these.</p>
+
+<p>The links are plain anchors to the destination. There is no redirect through a tracking service, no link decoration, and no click measurement, because there is nothing here to measure with.</p>
+
+<h2>Your rights</h2>
+
+<p>Under the GDPR and comparable regimes you have rights to access, rectify, erase and port your personal data, to object to processing, and to complain to a supervisory authority.</p>
+
+<p>In practice, the only personal data we hold is correspondence you sent us. If you want a copy of it, or want it deleted, write to the address on the <a href="/contact/">contact page</a> and it will be handled within thirty days.</p>
+
+<p>Server logs held by the hosting provider are subject to that provider's own retention schedule. We can pass on a request but we do not administer those systems.</p>
+
+<h2>Children</h2>
+
+<p>The site is not directed at children and collects nothing from anyone, so there is no data about a child to protect. The material is written for a general adult audience with secondary-school mathematics.</p>
+
+<h2>Data transfers</h2>
+
+<p>Static files are served from a content delivery network with points of presence in multiple countries, so the request that returns a page to you is handled by whichever location is nearest. Since no personal data is collected in the process beyond the transient request handling described above, there is no cross-border transfer of a dataset to disclose.</p>
+
+<h2>Security</h2>
+
+<p>The site is served over HTTPS. There is no login, no session, no user data at rest, and no server-side code, which removes most of the categories of vulnerability that affect web applications. The remaining risk surface is the hosting account itself and the DNS.</p>
+
+<p>If you find a security issue, write to the editors address. We will confirm receipt and tell you what we did.</p>
+
+<h2>Changes</h2>
+
+<p>Material changes to this notice will be described on this page for at least sixty days, with the date updated at the top.</p>
+
+<p>The specific change that would matter is adding analytics of any kind. Should that ever happen, it would be stated here in plain terms, at the top, before it went live, and it would say exactly what is collected and by whom. The current intention is that it will not happen.</p>
+
+</div>

@@ -1,0 +1,128 @@
+---
+layout: base.njk
+title: "Accessibility"
+description: "What Proof & Machine does to stay usable with a keyboard, a screen reader, magnification or reduced motion, the known gaps, and how to report a barrier."
+permalink: /accessibility/
+---
+
+<div class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">Statement</p>
+    <h1>Accessibility</h1>
+    <p>Last reviewed 26 August 2026. This site aims to meet WCAG 2.2 at Level AA. Below is what is implemented, what has been tested, and where the known gaps are.</p>
+  </div>
+</div>
+
+<div class="wrap narrow page-body prose">
+
+<h2>Conformance status</h2>
+
+<p>We believe the site substantially conforms to WCAG 2.2 Level AA. Substantially, not fully, because full conformance is a claim that requires an audit against every success criterion and we have tested against the ones that apply to a text-heavy static site rather than commissioning a formal audit.</p>
+
+<p>The known gaps are listed further down, in specific terms rather than as a general disclaimer. If you find one that is not listed, telling us is the fastest route to it being fixed.</p>
+
+<h2>What is implemented</h2>
+
+<h3>Structure and semantics</h3>
+
+<p>Every page uses real HTML landmarks: a header with the site navigation, a main region, a footer. Headings are properly nested, with one level-one heading per page and no levels skipped, so heading navigation in a screen reader gives you an accurate outline of the document.</p>
+
+<p>Articles use ordinary paragraph, list and table elements. There is no content rendered as an image of text anywhere on the site.</p>
+
+<p>Every page begins with a skip link that jumps to the main content. It is visually hidden until focused, at which point it appears at the top left with a solid background.</p>
+
+<h3>Keyboard</h3>
+
+<p>Everything interactive is reachable and operable with a keyboard alone. That means the navigation, the mobile menu toggle, every link, and every control in the step solver.</p>
+
+<p>Focus indication is a three-pixel solid outline with an offset, applied through <code>:focus-visible</code> so it appears for keyboard users without adding a ring on every mouse click. The outline uses the page's foreground colour, which gives it maximum contrast against the background in both light and dark schemes.</p>
+
+<p>There are no keyboard traps, no custom focus management that moves focus unexpectedly, and no positive tabindex values anywhere. Tab order follows document order because the layout does not reorder content visually.</p>
+
+<p>The expression field in the solver accepts Enter to evaluate, so the common case does not require tabbing to a button.</p>
+
+<h3>Colour and contrast</h3>
+
+<p>The palette is deliberately near-monochrome. Body text is near-black on white, which measures a contrast ratio around 19 to 1, far above the 4.5 to 1 required at Level AA. Muted secondary text uses a mid grey at approximately 5.3 to 1, above the threshold. Large headings clear the 3 to 1 large-text requirement with substantial margin.</p>
+
+<p>Colour is never the only carrier of meaning. There is no red-for-error and green-for-success anywhere. The solver's error state inverts to white text on a solid black block, which is a change in luminance and layout, legible regardless of colour perception.</p>
+
+<p>A dark colour scheme is supported through <code>prefers-color-scheme</code> and inverts the palette while preserving the same contrast ratios.</p>
+
+<h3>Text and zoom</h3>
+
+<p>All type is sized in relative units. Text reflows without horizontal scrolling at 400 percent zoom in a 1280 pixel viewport, which is the WCAG 2.2 reflow requirement.</p>
+
+<p>Line length in article text is capped at roughly 70 characters, which is within the range recommended for readers with dyslexia and for anyone using magnification. Line height in body text is 1.75, above the 1.5 minimum in the text spacing criterion.</p>
+
+<p>Applying custom text spacing through a user stylesheet does not clip or overlap content, because no container has a fixed height that depends on the text fitting.</p>
+
+<h3>Motion</h3>
+
+<p>There is very little animation on the site: a link underline that grows on hover, and nothing else. Any animation is disabled entirely under <code>prefers-reduced-motion: reduce</code>.</p>
+
+<p>Nothing moves, blinks, auto-plays or updates without your action. There are no carousels, no auto-advancing content and no video.</p>
+
+<h3>Forms and controls in the solver</h3>
+
+<p>Every input has a visible, programmatically associated label. Nothing relies on placeholder text as a label.</p>
+
+<p>The mode tabs use ARIA tab semantics with <code>aria-selected</code> reflecting the current state, and the selected tab is also distinguished visually by inverted colour and heavier weight, so the state is not conveyed to assistive technology alone.</p>
+
+<p>The result region carries <code>role="status"</code> and <code>aria-live="polite"</code>, so a screen reader announces the answer when a calculation completes, without interrupting whatever is being read at the time.</p>
+
+<p>Error messages appear in the same region as results, in text, describing what was wrong in ordinary language. An unbalanced parenthesis says so. It does not say "invalid input".</p>
+
+<p>Native inputs are set to 16 pixels on small screens, which prevents iOS Safari from zooming the viewport on focus and then failing to zoom back out.</p>
+
+<h3>Without JavaScript</h3>
+
+<p>Every page except the solver works completely with JavaScript disabled. Articles, navigation and all static pages are plain HTML.</p>
+
+<p>The one degradation is the mobile navigation toggle, which needs script to expand the menu below 760 pixels. On a wider viewport the navigation is always visible. This is a gap and it is listed below.</p>
+
+<p>The solver requires JavaScript because it is a calculator. There is no server to fall back to.</p>
+
+<h2>Known gaps</h2>
+
+<p>Stated specifically, because a vague statement of ongoing commitment is not useful to someone deciding whether the site will work for them.</p>
+
+<p><strong>Mobile navigation without JavaScript.</strong> With scripts disabled on a viewport under 760 pixels, the menu cannot be opened. Every page remains reachable through the footer, which is always visible and contains links to the archive, the solver, and every static page. A fix using a checkbox-based disclosure is planned.</p>
+
+<p><strong>Mathematical notation.</strong> Formulas in articles are written as prose or as plain-text expressions rather than as MathML or rendered LaTeX. This was chosen deliberately: rendered mathematics has poor and inconsistent screen reader support across browsers, and image-based rendering is worse. The tradeoff is that complex expressions read awkwardly. Where an expression is genuinely difficult to express in prose, the article restructures the argument rather than introducing notation.</p>
+
+<p><strong>Wide tables.</strong> A small number of articles contain comparison tables that scroll horizontally on narrow viewports. The scroll container is on the table rather than the page, so the article itself never scrolls sideways, but reaching the far column on a phone requires a horizontal gesture.</p>
+
+<p><strong>No formal audit.</strong> Testing has been manual, against the criteria listed above. No third-party accessibility audit has been commissioned and no automated scan substitutes for one.</p>
+
+<h2>How this was tested</h2>
+
+<p>Keyboard-only navigation through every page and every solver control, checking focus visibility and order.</p>
+
+<p>Screen reader passes with NVDA on Windows in Firefox, and VoiceOver on macOS in Safari, covering heading navigation, landmark navigation, the skip link, form labels and the live region announcements.</p>
+
+<p>Zoom to 400 percent at 1280 pixels wide, checking for reflow and clipping.</p>
+
+<p>Contrast measured on every text and background pairing in both colour schemes.</p>
+
+<p>Rendering with JavaScript disabled, and with a custom stylesheet applying the WCAG text spacing values.</p>
+
+<p>Automated checks with axe and the browser's built-in accessibility inspector, understood as a floor rather than a verdict, since automated tools detect roughly a third of real barriers.</p>
+
+<h2>Reporting a barrier</h2>
+
+<p>If something here does not work with your setup, we want to know, and a report will be treated as a bug rather than a request.</p>
+
+<p>Write to the editors address on the <a href="/contact/">contact page</a>. Useful detail: the page URL, what you were trying to do, what happened instead, and what you are using, meaning browser, operating system and any assistive technology with its version.</p>
+
+<p>You will get an acknowledgement within five working days with an assessment of the problem and, where a fix is straightforward, a date. Where it is not straightforward, you will get an honest account of what is involved rather than an indefinite acknowledgement.</p>
+
+<p>If you need content from this site in a different format, ask. A plain text version of any article can be provided.</p>
+
+<h2>Why this page is specific</h2>
+
+<p>Most accessibility statements are written to satisfy a requirement rather than to inform a reader, which is why they tend to describe aspirations and omit gaps. A statement that lists no known problems is either describing a fully audited site or is not being candid, and the second is more common.</p>
+
+<p>The four gaps above are real and the first one will affect somebody. Listing them is more useful than a paragraph about our commitment to inclusion, and it means this page can be checked against the site rather than merely believed.</p>
+
+</div>

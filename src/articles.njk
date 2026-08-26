@@ -1,0 +1,69 @@
+---
+layout: base.njk
+title: "Articles"
+description: "Every essay published on Proof & Machine: theorem provers, olympiad geometry, benchmark contamination, computer-assisted proofs, riddles and the limits of computation."
+permalink: /articles/
+---
+
+<div class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">Archive</p>
+    <h1>Articles</h1>
+    <p>{{ collections.posts | length }} essays, newest first. Roughly grouped into history, mechanism, honest accounting and puzzles, though most of them cross over.</p>
+  </div>
+</div>
+
+<div class="wrap page-body">
+  <ul class="index-list">
+    {% for post in collections.posts %}
+    <li>
+      <a href="{{ post.url }}">
+        <span class="num">{{ loop.revindex | pad }}</span>
+        <span>
+          <h3>{{ post.data.title }}</h3>
+          <p>{{ post.data.description }}</p>
+        </span>
+        <span class="meta">{{ post.data.category }}<br>{{ post.date | readableDate }}</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <div class="prose" style="margin-top:3.5rem">
+
+<h2>How to read this archive</h2>
+
+<p>The essays were written to stand alone, so there is no required order. If you are starting cold, though, four of them carry most of the framework the rest assume, and reading those first makes everything else cheaper.</p>
+
+<p>Start with the piece on how machines learned to do mathematics. It covers the seventy years from Logic Theorist proving propositions out of <em>Principia Mathematica</em> in 1956, through the computer algebra systems that still underpin most scientific computing, to the moment when statistical models started outperforming rule-following ones on problems requiring insight. The central claim, that modern systems split into a component that guesses and a component that verifies, is the lens the rest of the archive uses.</p>
+
+<p>Then read the one on tokenisation and counting. It explains, at the level of the actual data representation, why a language model struggles with a task any six-year-old handles, and why the same mechanism makes long arithmetic unreliable. Once you understand that a model never receives letters or digits, only opaque chunk identifiers, a whole class of otherwise baffling failures becomes predictable.</p>
+
+<p>Then the piece on what chain of thought really does. The popular framing, that asking a model to think step by step makes it think harder, is close to backwards. The real mechanism is computational: a transformer has fixed depth, so the amount of sequential work available before it emits a token is bounded, and generating intermediate tokens converts a depth limit into a length limit. This explains both why the technique works so well and why the written reasoning is not a reliable record of what the model did.</p>
+
+<p>Then the benchmark contamination piece, which is the one most likely to change how you read a news story. Every headline number about mathematical AI performance rests on an assumption that the test items were not in the training data, and that assumption is usually unverifiable and sometimes demonstrably false. The article covers the specific studies that measured the gap by building matched benchmarks from scratch.</p>
+
+<h2>The historical pieces</h2>
+
+<p>Three essays cover results that computers settled and humans could not check. The four colour theorem, proven in 1976 with 1,936 machine-verified cases and a 741-page paper, which started an argument about what a proof is that has never been resolved. The Boolean Pythagorean triples problem, settled in 2016 with a 200-terabyte proof log that was itself checked by a formally verified program. And the Mersenne prime search, which is the counterexample in the collection: a thirty-year distributed computation where machine learning has essentially nothing to contribute, because the underlying test is exact and the algorithms are already near-optimal.</p>
+
+<p>Reading these together makes a pattern visible. Computation settles a mathematical question when the search space can be made finite and the checking can be mechanised. It does not settle a question by exhausting a large finite prefix of an infinite space, which is why the Collatz conjecture remains open despite verification past 2 to the 68.</p>
+
+<h2>The practical pieces</h2>
+
+<p>Two essays are procedures rather than arguments. One is a method for checking a derivation you did not produce and could not have produced yourself, built around the asymmetry that verifying is far cheaper than deriving: check the type, test the boundary cases, substitute back, use a second system of a different kind, and only then read the reasoning. The other is a guide to choosing between a computer algebra system and a language model for a given task, which comes down to whether you need translation from informal to formal, or exact manipulation of something already formal.</p>
+
+<p>The piece on AI tutoring belongs here too. It is the most directly consequential subject in the archive, because it involves children, and the evidence is thinner than the marketing implies. The short version: systems designed as answer engines appear to produce worse learning outcomes than no system at all, while systems designed around retrieval practice, spacing and withheld answers produce real gains. The model is the same in both cases. The scaffolding is the whole difference.</p>
+
+<h2>The puzzles</h2>
+
+<p>The riddle collection is the shortest path to understanding the memorisation question. Ten classic problems, with the honest picture of how current systems handle each, and more importantly what happens when you change one premise so the famous answer becomes wrong. Monty Hall with a host who does not know where the car is. Ants on a pole with different speeds. The pattern is consistent enough to be useful as a personal test: reliability clusters on famous problems with famous solutions, and falls away on variants that punish pattern matching.</p>
+
+<p>Two further essays cover the boundaries. The busy beaver function grows faster than any computable function, which is a two-line proof with permanent consequences for what any machine can determine. P versus NP is the open question whose answer, in the expected direction, would change nothing practical, and whose barriers explain why fifty years of effort has not settled it.</p>
+
+<h2>Corrections</h2>
+
+<p>Several of these pieces will age badly, and the ones making claims about current system capability will age fastest. Where a specific benchmark number or record is stated, it was accurate when written and the date is on the article. Where something turns out to have been wrong rather than merely superseded, we correct it in place and say so at the foot of the piece. If you find an error, the <a href="/contact/">contact page</a> is the fastest route to someone who will read it.</p>
+
+  </div>
+</div>

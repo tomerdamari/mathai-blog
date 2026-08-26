@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ title }} | Proof & Machine</title>
+<meta name="description" content="{{ description or 'Proof and Machine: essays on artificial intelligence and mathematics, from theorem provers to puzzle solving.' }}">
+<link rel="stylesheet" href="/assets/style.css">
+<link rel="alternate" type="application/atom+xml" title="Proof &amp; Machine" href="/feed.xml">
+<link rel="canonical" href="{{ site.url }}{{ page.url }}">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000'/><text x='16' y='23' font-size='20' font-family='serif' fill='%23fff' text-anchor='middle'>&#8721;</text></svg>">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="wrap head-inner">
+    <a class="brand" href="/">
+      <span class="brand-mark" aria-hidden="true">&#8721;</span>
+      <span class="brand-text">Proof<span class="amp">&amp;</span>Machine</span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="nav" class="nav" aria-label="Main">
+      <a href="/">Home</a>
+      <a href="/articles/">Articles</a>
+      <a href="/tool/">Solver</a>
+      <a href="/search/">Search</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+{{ content | safe }}
+</main>
+
+<footer class="site-foot">
+  <div class="wrap foot-grid">
+    <div>
+      <p class="foot-brand">Proof<span class="amp">&amp;</span>Machine</p>
+      <p class="muted">Essays on machines that do mathematics. Published from Tel Aviv, read everywhere.</p>
+    </div>
+    <div>
+      <h2>Read</h2>
+      <ul>
+        <li><a href="/articles/">All articles</a></li>
+        <li><a href="/tool/">Step solver</a></li>
+        <li><a href="/search/">Search</a></li>
+        <li><a href="/feed.xml">Atom feed</a></li>
+        <li><a href="/about/">About</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Legal</h2>
+      <ul>
+        <li><a href="/terms/">Terms of use</a></li>
+        <li><a href="/privacy/">Privacy</a></li>
+        <li><a href="/accessibility/">Accessibility</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <p class="muted">&copy; 2026 Proof &amp; Machine. Text licensed for personal reading and quotation with attribution.</p>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.nav-toggle').addEventListener('click', function () {
+  var open = this.getAttribute('aria-expanded') === 'true';
+  this.setAttribute('aria-expanded', String(!open));
+  document.getElementById('nav').classList.toggle('open', !open);
+});
+</script>
+</body>
+</html>
