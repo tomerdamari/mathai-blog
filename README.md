@@ -17,11 +17,12 @@ npm run build  # writes _site/
 
 ## Tests
 
-Two plain `node` scripts, no framework.
+Three plain `node` scripts, no framework.
 
 ```bash
 node solver.test.mjs   # expression parser, quadratic, factorisation, Euclid
 node search.test.mjs   # ranking, snippets, and the generated index if _site/ exists
+node contact.test.mjs  # form validation, and the built page if _site/ exists
 ```
 
 `search.test.mjs` asserts against `_site/search-index.json` when it is present, so run
@@ -29,8 +30,9 @@ node search.test.mjs   # ranking, snippets, and the generated index if _site/ ex
 
 ## Before deploying
 
-`src/_data/site.json` has an empty `url`. Set it to the site's origin, with no trailing
-slash, e.g. `https://example.com`. Four things read it:
+`src/_data/site.json` holds the site origin, currently the GitHub Pages URL. Change it
+with no trailing slash if the site moves, and set `PATH_PREFIX` in the workflow to match
+(`/` for a bare domain). Four things read the origin:
 
 | File | Uses it for |
 | --- | --- |
@@ -39,11 +41,10 @@ slash, e.g. `https://example.com`. Four things read it:
 | `src/sitemap.xml` | `<loc>` values, which must be absolute |
 | `src/robots.njk` | the `Sitemap:` line |
 
-Until it is set, canonicals and feed ids are relative. That is harmless locally and wrong
-in production, so set it before the first deploy.
-
-The contact addresses in `src/contact.njk` are placeholders using the `.example` TLD.
-Replace them with real ones or remove the page.
+The contact form posts to FormSubmit, which requires a one-time activation: the first
+submission triggers a confirmation email to tommycoupe@gmail.com, and nothing is
+forwarded until that link is clicked. FormSubmit can also issue a random alias so the
+address is not sitting in the page source; swap it into the form action once activated.
 
 ## Layout
 

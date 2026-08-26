@@ -1,7 +1,7 @@
 ---
 layout: base.njk
 title: "Contact"
-description: "How to reach Proof & Machine: corrections, pitches, technical disputes, permissions and press. What gets a reply and how long it takes."
+description: "Send a correction, a pitch or a technical disagreement to Proof & Machine. A working form, or plain email, whichever you prefer."
 permalink: /contact/
 ---
 
@@ -9,35 +9,87 @@ permalink: /contact/
   <div class="wrap">
     <p class="eyebrow">Contact</p>
     <h1>Get in touch</h1>
-    <p>Corrections first, everything else after. There is no form on this page and no address collected, for reasons explained below.</p>
+    <p>Corrections go to the front of the queue. Use the form or write directly, whichever suits you, since both arrive in the same inbox.</p>
   </div>
 </div>
 
-<div class="wrap narrow page-body prose">
+<div class="wrap page-body">
 
-<div class="callout">
-<p><strong>Corrections and disputes:</strong> corrections [at] proofandmachine.example</p>
-<p><strong>Everything else:</strong> editors [at] proofandmachine.example</p>
-<p class="muted small">Addresses are written out rather than linked to reduce scraping. Replace [at] with the symbol. Replies typically within five working days for corrections, longer for everything else.</p>
-</div>
+  <div class="form-grid">
+    <div class="form-main">
+      <form id="contact-form" action="https://formsubmit.co/tommycoupe@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="Proof &amp; Machine: message from the contact form">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <p class="honey" aria-hidden="true">
+          <label for="_honey">Leave this field empty</label>
+          <input type="text" id="_honey" name="_honey" tabindex="-1" autocomplete="off">
+        </p>
 
-<h2>Why there is no contact form</h2>
+        <div class="field">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" required autocomplete="name">
+        </div>
 
-<p>A form needs somewhere to send what you type. That means a server endpoint, which means either running one or handing your message to a third-party service. Either way, your name, your address and whatever you wrote end up stored somewhere, subject to that service's retention policy and breach history, and the site would need a privacy notice explaining the arrangement.</p>
+        <div class="field">
+          <label for="email">Your email</label>
+          <input type="email" id="email" name="email" required autocomplete="email">
+          <p class="muted small">Used to reply to you and nothing else. It is never added to a list, because there is no list.</p>
+        </div>
 
-<p>This site is static files. There is no server-side code, no database, and nothing that receives a submission. Adding a form would mean adding all of the above so that you could avoid opening your mail client, which is not a trade worth making.</p>
+        <div class="field">
+          <label for="topic">What is this about</label>
+          <select id="topic" name="topic">
+            <option>Correction to an article</option>
+            <option>Technical disagreement</option>
+            <option>Pitch</option>
+            <option>Permission or reuse</option>
+            <option>Accessibility barrier</option>
+            <option>Press</option>
+            <option>Something else</option>
+          </select>
+        </div>
 
-<p>Email also has a property forms lack: you keep a copy of what you sent. If we misquote you or fail to reply, you have the record. That matters more for corrections than for anything else.</p>
+        <div class="field">
+          <label for="article">Article, if it is about one</label>
+          <input type="text" id="article" name="article" placeholder="Title or URL" autocomplete="off">
+        </div>
+
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="9" required></textarea>
+          <p class="muted small">For a correction, quoting the exact sentence you think is wrong saves a round trip.</p>
+        </div>
+
+        <p><button class="btn" type="submit">Send message</button></p>
+        <p id="form-status" class="form-status hidden" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+
+    <aside class="form-aside">
+      <h2>Or write directly</h2>
+      <p class="mono-line">tommycoupe@gmail.com</p>
+      <p class="muted small">The form delivers to this address. Writing straight to it skips a step and leaves you holding a copy of what you sent, which is worth something if a correction goes unanswered.</p>
+      <hr class="rule">
+      <h2>Reply times</h2>
+      <p class="muted small">Corrections: five working days, usually sooner.<br>
+      Technical disagreements: two to three weeks.<br>
+      Pitches: two weeks.<br>
+      Everything else: variable.</p>
+    </aside>
+  </div>
+
+  <div class="prose narrow" style="margin-top:3.5rem;margin-inline:0;width:auto">
 
 <h2>Corrections</h2>
 
-<p>This is the category we care about most and the one that gets handled fastest.</p>
+<p>This is the category we care about most and the one that moves fastest.</p>
 
 <p>A useful correction identifies the article, quotes the specific sentence, states what is wrong with it, and where possible points at a source. That last part is not a requirement. If you know something is wrong and cannot immediately produce the citation, send it anyway and we will do the looking.</p>
 
 <p>What happens next: the claim gets checked against primary sources. If it was wrong, the article is edited and a note goes at the foot recording what it said before, what it says now, and the date. If the error changed the conclusion of the piece rather than a detail within it, the note goes at the top instead. If we cannot determine who is right, the article gets a note saying the point is disputed, with your objection summarised.</p>
 
-<p>If you were wrong, you get an email explaining why, with the source. Nobody is embarrassed by this. Several of the more useful exchanges this site has had started with a correction that turned out not to be one and ended with a paragraph being rewritten anyway, because the fact that a careful reader misread it meant it was badly written.</p>
+<p>If you turn out to have been wrong, you get an email explaining why, with the source. Nobody is embarrassed by this. Several of the more useful exchanges this site has had started with a correction that turned out not to be one and ended with a paragraph being rewritten anyway, because the fact that a careful reader misread it meant it was badly written.</p>
 
 <p>You will be credited by name unless you ask not to be.</p>
 
@@ -47,7 +99,7 @@ permalink: /contact/
 
 <p>We will correct factual errors regardless of who reports them. We will not remove a critical characterisation because the subject disagrees with it, though we will publish the disagreement alongside it, at whatever length is proportionate.</p>
 
-<p>Two specific things are always worth telling us. First, if an article describes a behaviour that has since been fixed, because articles about model capability age fast and we would rather date-stamp than mislead. Second, if a benchmark number we quoted was run under conditions different from what we stated, since evaluation conditions move results by more than most reported differences.</p>
+<p>Two things are always worth telling us. First, if an article describes a behaviour that has since been fixed, because articles about model capability age fast and we would rather date-stamp than mislead. Second, if a benchmark number we quoted was run under conditions different from what we stated, since evaluation conditions move results by more than most reported differences.</p>
 
 <h2>Pitches</h2>
 
@@ -55,7 +107,7 @@ permalink: /contact/
 
 <p>What works here: a detailed account of a formalisation project and what it cost, a careful look at a benchmark's construction and what it actually measures, a piece of history involving a specific system and a specific result, a mechanism explanation aimed at someone with secondary-school mathematics and no machine learning background.</p>
 
-<p>What does not: predictions about what will happen in five years, general commentary on whether AI is good or bad, anything whose argument would survive unchanged if the specific technical details were replaced with different ones.</p>
+<p>What does not: predictions about what will happen in five years, general commentary on whether AI is good or bad, anything whose argument would survive unchanged if the specific technical details were swapped for different ones.</p>
 
 <p>Send a paragraph on the idea and a link to something you have written. Not a full draft. If it fits, we will talk about length and approach before you write it, which saves everyone the awkward conversation later. Pieces here run between 1,200 and 2,500 words and there is no payment, which we mention up front rather than at the end of a negotiation.</p>
 
@@ -75,28 +127,25 @@ permalink: /contact/
 
 <p>The code for the step solver is available and reusable. If you want to build on it, take it.</p>
 
-<p>For translation: yes, please, and tell us where it goes so we can link to it. If you translate a piece we will link the translation from the original.</p>
+<p>For translation: yes, please, and tell us where it goes. If you translate a piece we will link the translation from the original.</p>
 
-<h2>Press</h2>
+<h2>What happens to what you send</h2>
 
-<p>Happy to answer questions on the record about anything published here. We do not provide comment on stories about AI companies, capability claims we have not investigated, or predictions, because we would be making it up and it would sound authoritative.</p>
+<p>The form hands your message to FormSubmit, a third-party relay that forwards it to the inbox above. It exists because this site is static files with no server of its own, and a form has to post somewhere.</p>
 
-<p>If you want a source who will tell you honestly that a particular claim cannot currently be evaluated, that is a service we can offer.</p>
+<p>That is the one place on this site where something you type leaves your browser, and it happens only when you press send. There is no script from that service loaded on the page, no cookie set, and nothing recorded while you type. If you would rather not involve a relay at all, write to the address directly; it reaches the same person.</p>
+
+<p>Messages are read by the editors and kept while the matter is open. Correspondence about a correction is retained alongside the article's revision history, because a correction note needs to be traceable to what prompted it. Everything else is deleted when it is no longer needed. The <a href="/privacy/">privacy page</a> sets this out in full.</p>
 
 <h2>What we do not respond to</h2>
 
 <p>Requests to review a product. Link exchange proposals. Requests to add a link to an existing article in return for anything. Content marketing pitches of any kind, including ones dressed as corrections. Claimed proofs of Millennium Prize problems, which arrive more often than you would think and which we are not equipped to evaluate.</p>
 
-<p>Nothing on this page is a support channel for any AI product. If a system is giving you wrong answers, the company that built it has a support process and we have no ability to affect it.</p>
+<p>Nothing here is a support channel for any AI product. If a system is giving you wrong answers, the company that built it has a support process and we have no ability to affect it.</p>
 
-<h2>Response times, honestly</h2>
+<p>If a message matters and has gone unanswered, resending it is the right move and is not considered rude here. This is a small operation run alongside other work, and the failure mode is silence rather than a decline.</p>
 
-<p>Corrections: within five working days, usually faster, because they go to the front of the queue.</p>
-
-<p>Technical disagreements: two to three weeks.</p>
-
-<p>Pitches: two weeks, and if you have not heard back after three, it means the email was lost rather than that the answer is no. Send it again.</p>
-
-<p>Everything else: variable, and occasionally never. This is a small operation run alongside other work, and the failure mode is silence rather than a decline. If a message matters and has gone unanswered, resending it is the correct move and is not considered rude here.</p>
-
+  </div>
 </div>
+
+<script type="module" src="/assets/contact.js"></script>

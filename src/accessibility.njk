@@ -75,9 +75,19 @@ permalink: /accessibility/
 
 <p>Native inputs are set to 16 pixels on small screens, which prevents iOS Safari from zooming the viewport on focus and then failing to zoom back out.</p>
 
+<h3>The contact form</h3>
+
+<p>Every field has a visible label bound to its control, and the labels say what the field is for rather than relying on placeholder text. The message field states its purpose below the control, not inside it.</p>
+
+<p>Validation happens on submit, not while you type, so nothing is flagged as wrong before you have finished writing it. When a field fails, the message describes the problem in ordinary language and focus moves to that field, so a screen reader user is told what is wrong and taken to it in one step.</p>
+
+<p>The status message uses <code>role="status"</code> with a polite live region, so success, failure and progress are announced without interrupting whatever is being read. The error state is a filled black block rather than a colour change, legible regardless of colour perception.</p>
+
+<p>The form works without JavaScript. It is a real form element with a real action, so submitting it without scripts posts normally and lands on the relay's own confirmation page. The script only keeps you on this site and shows the result inline.</p>
+
 <h3>Without JavaScript</h3>
 
-<p>Every page except the solver works completely with JavaScript disabled. Articles, navigation and all static pages are plain HTML.</p>
+<p>Every page except the solver and search works completely with JavaScript disabled. Articles, navigation, all static pages and the contact form are plain HTML.</p>
 
 <p>The one degradation is the mobile navigation toggle, which needs script to expand the menu below 760 pixels. On a wider viewport the navigation is always visible. This is a gap and it is listed below.</p>
 

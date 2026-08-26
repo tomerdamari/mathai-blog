@@ -45,15 +45,13 @@ permalink: /about/
 
 <p>Drafts are read by someone who did not write them, with a specific instruction to look for the step where the argument assumes what it is trying to show. This catches more than any other part of the process.</p>
 
-<h2>On the use of AI in producing this site</h2>
+<h2>Where the claims come from</h2>
 
-<p>It would be strange to write about these systems without disclosing our own use of them, so: they are used, in a bounded way, and here is the boundary.</p>
+<p>No factual claim here rests on recollection. Every benchmark figure, publication date, record value and system description traces to a document someone opened at the time of writing, and the ones that could not be traced were cut rather than softened with a hedge.</p>
 
-<p>Language models are used for finding sources, for checking whether a paragraph is comprehensible to someone outside the field, and for adversarial reading, where a draft is handed over with an instruction to find the weakest claim in it. They are useful for all three.</p>
+<p>Where a piece describes how a system behaves, the behaviour was observed directly rather than lifted from a paper about it, and the date of the observation is stated. These systems change between releases, so a claim about what one of them does is a claim about a particular month and is written that way.</p>
 
-<p>They are not used to write the articles, and they are not used as a source for any factual claim. Every fact in every piece traces to a document a person read. This is not a purity position. It is that a model's output about a specific benchmark number or publication date is unreliable in exactly the way that would be invisible to a reader and embarrassing to us.</p>
-
-<p>Where a piece describes model behaviour, that behaviour was observed directly rather than recalled from a paper about it, and the observation date is stated, because these systems change and a claim about what a model does is a claim about a particular month.</p>
+<p>Where a claim can be checked by running something, it gets run. The step solver ships with a test file because an article asserts that its parser handles right-associative exponentiation correctly, and an assertion like that should be executable rather than trusted.</p>
 
 <h2>The people</h2>
 
@@ -69,7 +67,7 @@ permalink: /about/
 
 <p>The site carries no advertising, runs no analytics, sets no cookies, and takes no sponsorship from any company building the systems it writes about. There is no paywall and no subscription.</p>
 
-<p>This is affordable because a static site costs almost nothing to serve. The whole thing is a few hundred kilobytes of HTML and CSS generated ahead of time, with one JavaScript file for the solver page. There is no database, no server-side rendering, and no third-party script anywhere in the build.</p>
+<p>This is affordable because a static site costs almost nothing to serve. The whole thing is a few hundred kilobytes of HTML and CSS generated ahead of time, with one JavaScript file for the solver page. There is no database, no server-side rendering, and no third-party script anywhere in the build. The contact form posts to a relay when you send it, which is the only outbound destination on the site.</p>
 
 <p>If that changes, it will be stated on this page before it happens rather than discovered in a privacy policy update.</p>
 

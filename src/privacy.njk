@@ -9,7 +9,7 @@ permalink: /privacy/
   <div class="wrap">
     <p class="eyebrow">Legal</p>
     <h1>Privacy</h1>
-    <p>Last updated 26 August 2026. Short version: no cookies, no analytics, no third-party scripts, no accounts, and nothing you type in the solver leaves your machine.</p>
+    <p>Last updated 26 August 2026. Short version: no cookies, no analytics, no third-party scripts, no accounts. The one thing that leaves your browser is a message you deliberately send through the contact form.</p>
   </div>
 </div>
 
@@ -17,9 +17,11 @@ permalink: /privacy/
 
 <h2>The summary</h2>
 
-<p>This site sets no cookies. It runs no analytics. It loads no fonts, scripts, images or stylesheets from any other domain. It has no accounts, no newsletter, no comment system and no contact form. It does not use local storage or session storage.</p>
+<p>This site sets no cookies. It runs no analytics. It loads no fonts, scripts, images or stylesheets from any other domain. It has no accounts, no newsletter and no comment system. It does not use local storage or session storage.</p>
 
-<p>The one piece of JavaScript on the site is the step solver, which is a calculator that runs in your browser and makes no network requests at any point.</p>
+<p>There are three small pieces of JavaScript, all served from this domain. The step solver is a calculator that makes no network requests at any point. The search page fetches one index file from this domain and filters it locally, so no query is transmitted. The contact form posts your message when you press send, and only then.</p>
+
+<p>That last one is the single exception to everything above, and it has its own section below.</p>
 
 <p>You do not have to take our word for any of this, and the section on verification below explains how to check it in about a minute.</p>
 
@@ -49,15 +51,29 @@ permalink: /privacy/
 
 <p>This is not a policy commitment that could quietly change. It is a property of the code, which is served from this domain at <code>/assets/solver.js</code>, is a few hundred lines, and contains no fetch, no XMLHttpRequest, no WebSocket and no storage call. You can read it.</p>
 
+<h2>The contact form</h2>
+
+<p>This is the one place on the site where something you type is transmitted, and it happens only when you press send.</p>
+
+<p>The form posts to FormSubmit, a third-party relay that forwards the message to our inbox. It exists because this site is static files with no server of its own, and a form has to post somewhere. What is sent is exactly what the form shows: your name, your email address, the topic you picked, the article field if you filled it, and your message. FormSubmit also sees the network metadata that any recipient of an HTTP request sees, including your IP address, and it applies its own spam filtering to decide whether to forward.</p>
+
+<p>No script from that service is loaded on the page. Nothing is set in your browser by it. Nothing is recorded while you type. Open the network tab and type into the form for as long as you like: there is one request, when you submit, and nothing before it.</p>
+
+<p>FormSubmit is a separate company with its own privacy policy and its own retention practices, which we do not control. If you would rather not involve a relay at all, write to the address on the <a href="/contact/">contact page</a> directly. It reaches the same person and the form is a convenience rather than the only route.</p>
+
+<p>The lawful basis for handling what you send is legitimate interest in responding to correspondence. Your address is used to reply to you and nothing else. It is never added to a list, because there is no list.</p>
+
 <h2>How to verify this yourself</h2>
 
 <p>Open your browser's developer tools before loading a page here. In Firefox or Chrome that is F12, or right-click and choose Inspect.</p>
 
-<p>Go to the Network tab and reload. You will see requests for the HTML document, one stylesheet, and on the solver page one JavaScript file. Every one is served from this domain. There are no requests to any analytics endpoint, font provider, CDN or tag manager, because there is nothing here to make them.</p>
+<p>Go to the Network tab and reload. You will see requests for the HTML document, one stylesheet, and on the solver, search and contact pages one JavaScript file each. Every one is served from this domain. There are no requests to any analytics endpoint, font provider, CDN or tag manager, because there is nothing here to make them.</p>
 
 <p>Go to the Application or Storage tab and look at Cookies, Local Storage and Session Storage. All empty.</p>
 
 <p>Now use the solver. Watch the Network tab while you evaluate an expression. Nothing appears.</p>
+
+<p>Do the same on the search page. One request for the index when the page loads, then nothing however much you type. On the contact page, nothing appears until you press send.</p>
 
 <p>This check takes under a minute and it is worth doing on any site that makes claims like these, including this one. A privacy policy is a promise. The network tab is evidence.</p>
 
@@ -81,13 +97,13 @@ permalink: /privacy/
 
 <p>Under the GDPR and comparable regimes you have rights to access, rectify, erase and port your personal data, to object to processing, and to complain to a supervisory authority.</p>
 
-<p>In practice, the only personal data we hold is correspondence you sent us. If you want a copy of it, or want it deleted, write to the address on the <a href="/contact/">contact page</a> and it will be handled within thirty days.</p>
+<p>In practice, the only personal data we hold is correspondence you sent us, whether by the form or directly by email. If you want a copy of it, or want it deleted, write to the address on the <a href="/contact/">contact page</a> and it will be handled within thirty days.</p>
 
 <p>Server logs held by the hosting provider are subject to that provider's own retention schedule. We can pass on a request but we do not administer those systems.</p>
 
 <h2>Children</h2>
 
-<p>The site is not directed at children and collects nothing from anyone, so there is no data about a child to protect. The material is written for a general adult audience with secondary-school mathematics.</p>
+<p>The site is not directed at children and the material is written for a general adult audience with secondary-school mathematics. Nothing is collected from anyone who does not deliberately send a message, and we do not knowingly hold correspondence from a child. If you believe we do, write and it will be deleted.</p>
 
 <h2>Data transfers</h2>
 
